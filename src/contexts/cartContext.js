@@ -4,6 +4,8 @@ import {
   update as updateCarrinho,
   remove as removeCarrinho,
   add as addCarrinho,
+  getLength,
+  getTotal,
 } from "../utils/cartUtil";
 
 export const CartContext = createContext({});
@@ -14,10 +16,9 @@ function CartProvider({ children }) {
   const [total, setTotal] = useState("0");
 
   useEffect(() => {
-    setLength(cart.reduce((cc, o) => (cc += o.length), 0));
-    setTotal(
-      cart.reduce((cc, o) => (cc += o.length * o.produto?.price), 0).toFixed(2)
-    );
+    
+    setLength(getLength(cart));
+    setTotal(getTotal(cart));
   }, [cart]);
 
   function add(carrinho) {

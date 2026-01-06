@@ -71,3 +71,21 @@ export function remove(carrinhos, carrinho) {
     throw error;
   }
 }
+
+export function getLength(carrinhos) {
+  if (!carrinhos) return 0;
+
+  if (carrinhos.length === 0) return 0;
+
+  return carrinhos.reduce((cc, o) => (cc += o.length), 0);
+}
+
+export function getTotal(carrinhos) {
+  if (!carrinhos) return Number(0).toFixed(2);
+
+  if (carrinhos.length === 0) return Number(0).toFixed(2);
+
+  return carrinhos
+    .reduce((cc, o) => (cc += o.length * o.produto?.price), 0)
+    .toFixed(2);
+}
